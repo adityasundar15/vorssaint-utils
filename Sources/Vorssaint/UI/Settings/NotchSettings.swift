@@ -28,6 +28,7 @@ struct NotchSettings: View {
     @AppStorage(DefaultsKey.notchLyricsOnline) private var lyricsOnline = false
     @AppStorage(DefaultsKey.notchQueueEnabled) private var queueEnabled = true
     @AppStorage(DefaultsKey.notchArtworkGlowEnabled) private var glowEnabled = true
+    @AppStorage(DefaultsKey.notchArtworkAccentEnabled) private var accentEnabled = true
     @AppStorage(DefaultsKey.notchLiveEqualizer) private var liveEqualizer = false
     @AppStorage(DefaultsKey.notchEnabled) private var enabled = false
     @AppStorage(DefaultsKey.notchMascotEnabled) private var mascotEnabled = false
@@ -402,6 +403,7 @@ struct NotchSettings: View {
                       isOn: $liveEqualizer)
                 .disabled(!NotchAudioLevelSupport.isSupported || !AppFeature.notchLiveEqualizer.isAvailable)
             switchRow("rays", music.enableArtworkGlow, isOn: $glowEnabled)
+            switchRow("paintpalette", music.enableArtworkAccent, isOn: $accentEnabled)
         case .notifications:
             let notifications = FeatureStrings.notchNotifications(l10n.language)
             switchRow("bell.slash", notifications.hideSystemBanner, caption: notifications.hideSystemBannerHint,
