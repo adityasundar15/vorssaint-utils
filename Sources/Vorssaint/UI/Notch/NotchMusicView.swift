@@ -13,6 +13,7 @@ struct NotchMusicView: View {
     @AppStorage(DefaultsKey.notchLyricsEnabled) private var lyricsEnabled = true
     @AppStorage(DefaultsKey.notchQueueEnabled) private var queueEnabled = true
     @AppStorage(DefaultsKey.notchArtworkGlowEnabled) private var glowEnabled = true
+    @AppStorage(DefaultsKey.notchArtworkAccentEnabled) private var accentEnabled = true
     @State private var extra: MusicExtra?
     private enum MusicExtra { case lyrics, queue }
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -20,7 +21,7 @@ struct NotchMusicView: View {
     private var text: RadialMenuFeatureStrings { FeatureStrings.radialMenu(l10n.language) }
     /// The cover's own colour, used for its halo and for the moving parts that
     /// belong to this track. Neutral covers keep the panel white.
-    private var accent: Color { service.artworkTint?.color ?? .white }
+    private var accent: Color { accentEnabled ? (service.artworkTint?.color ?? .white) : .white }
     private var halo: Color { glowEnabled ? (service.artworkTint?.color ?? .clear) : .clear }
     private var showsLyrics: Bool { lyricsEnabled && AppFeature.notchLyrics.isAvailable }
     private var showsQueue: Bool { queueEnabled && AppFeature.notchQueue.isAvailable }
